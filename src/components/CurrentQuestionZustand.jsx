@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
+import { useShallow } from "zustand/react/shallow";
 import { Link } from "react-router-dom";
 import he from "he";
 import useQuizStore from "../stores/quizStore"; // Adjust the path accordingly
 
 export const CurrentQuestionZustand = () => {
   const { questions, currentQuestionIndex, goToNextQuestion, quizOver, submitAnswer } =
-    useQuizStore((state) => ({
-      questions: state.questions,
-      currentQuestionIndex: state.currentQuestionIndex,
-      showAnswer: state.showAnswer,
-      goToNextQuestion: state.goToNextQuestion,
-      quizOver: state.quizOver,
-      submitAnswer: state.submitAnswer,
-    }));
+    useQuizStore(
+      useShallow((state) => ({
+        questions: state.questions,
+        currentQuestionIndex: state.currentQuestionIndex,
+        showAnswer: state.showAnswer,
+        goToNextQuestion: state.goToNextQuestion,
+        quizOver: state.quizOver,
+        submitAnswer: state.submitAnswer,
+      }))
+    );
 
   const [choice, setChoice] = useState("");
   const [isAnswered, setIsAnswered] = useState(false);
@@ -36,7 +39,6 @@ export const CurrentQuestionZustand = () => {
     submitAnswer(currentQuestionIndex, choice, unOrderedAnswers);
     if (question.correct_answer === choice) {
       alert("correct");
-
       setIsCorrect(true);
     }
     setIsAnswered(true);

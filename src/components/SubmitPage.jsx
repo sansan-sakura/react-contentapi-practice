@@ -1,6 +1,5 @@
 import useQuizStore from "../stores/quizStore";
 import he from "he";
-import styles from "./SubmitPage.module.css";
 
 export const SubmitPage = () => {
   const previousAnswers = useQuizStore((state) => state.previousAnswers);
