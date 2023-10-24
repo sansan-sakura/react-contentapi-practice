@@ -1,14 +1,15 @@
-import { CurrentQuestionUseContext } from "./components/CurrentQuestionUseContext";
 import { CurrentQuestionZustand } from "./components/CurrentQuestionZustand";
-import { QuizProvider } from "./context/QuizContext";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { SubmitPage } from "./components/SubmitPage";
 
 export const App = () => {
   return (
-    <QuizProvider>
-      <div>
-        <CurrentQuestionUseContext />
-        <CurrentQuestionZustand />
-      </div>
-    </QuizProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<CurrentQuestionZustand />} />
+        <Route path="/submit" element={<SubmitPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
+//
